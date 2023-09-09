@@ -7,6 +7,10 @@ export async function load() {
   return { todos }
 }
 
+async function sleep(ms: number) {
+    return new Promise((resolve) => setTimeout(resolve, ms))
+}
+
 export const actions = {
   addTodo: async ({ request }) => {
     const formData = await request.formData()
@@ -15,6 +19,8 @@ export const actions = {
     if (!todo) {
       return fail(400, { todo, missing: true })
     }
+
+    await sleep(2000)
 
     addTodo(todo)
 
