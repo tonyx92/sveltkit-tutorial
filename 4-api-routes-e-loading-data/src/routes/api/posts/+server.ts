@@ -3,16 +3,19 @@ import { json } from '@sveltejs/kit'
 import db from '$lib/database'
 
 
-export async function GET(event) {
+export async function GET({url}) {
+  console.log(url.searchParams)// { 'limit' => '4', 'order' => 'desc' }
+
+  const limit = Number(url.searchParams.get('limit') ?? 30)
+  const order = url.searchParams.get('order') ?? 'asc'
+
+
   const posts = await db.post.findMany({
-    // get random numbers of posts to test caching
-    take: Math.round(Math.random() * 30)
+    orderBy: { id: order},
+    take: limit
   })
 
-  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching
-  event.setHeaders({
-    'Cache-Control': 'max-age=60'
-  })
+ 
 
   return json(posts)
 }
