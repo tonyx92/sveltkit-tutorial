@@ -2,6 +2,10 @@
 	"name": "4-api-routes-e-loading-data",
 	"version": "0.0.1",
 	"private": true,
+
+	"prisma": {
+		"seed": "npx vite-node prisma/seed.ts"
+	  },
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
@@ -35,9 +39,7 @@
 	"type": "module",
 	"dependencies": {
 		"@prisma/client": "^5.2.0"
-	},
-	"prisma": {
-		"seed": "npx vite-node prisma/seed.ts"
-	  }
+	}
+	
 	
 }
